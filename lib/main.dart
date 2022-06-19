@@ -40,7 +40,7 @@ class IsolateDemo extends StatelessWidget{
                   print('Defaut: $result')
                 });
               },
-              child: const Text('Click In Here 1'),
+              child: const Text('Default'),
             ),
           ),
         ),
@@ -51,7 +51,7 @@ class IsolateDemo extends StatelessWidget{
               onPressed: (){
                 createNewIsolate();
               },
-              child: const Text('Click In Here 2'),
+              child: const Text('Isolate Spawn'),
             ),
           ),
         ),
@@ -62,7 +62,7 @@ class IsolateDemo extends StatelessWidget{
               onPressed: (){
                 demoCompute();
               },
-              child: const Text('Click In Here 3'),
+              child: const Text('Compute'),
             ),
           ),
         ),
