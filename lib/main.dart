@@ -1,8 +1,6 @@
-// ignore_for_file: avoid_print
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'dart:isolate';
-
 import 'package:isolate/image_rotate.dart';
 void main() {
   runApp(const MyApp());
@@ -38,7 +36,8 @@ class IsolateDemo extends StatelessWidget{
             child: ElevatedButton(
               onPressed: (){
                 sum().then((result)=>{
-                  print(result)
+                  // ignore: avoid_print
+                  print('Defaut: $result')
                 });
               },
               child: const Text('Click In Here 1'),
@@ -53,6 +52,17 @@ class IsolateDemo extends StatelessWidget{
                 createNewIsolate();
               },
               child: const Text('Click In Here 2'),
+            ),
+          ),
+        ),
+        Center(
+          child: Container(
+            margin: const EdgeInsets.only(top:20),
+            child: ElevatedButton(
+              onPressed: (){
+                demoCompute();
+              },
+              child: const Text('Click In Here 3'),
             ),
           ),
         ),
@@ -72,9 +82,10 @@ class IsolateDemo extends StatelessWidget{
     // Main Isolate
     var receivePort = ReceivePort();
     const total = 1000000000;
-    var newIsolate = await Isolate.spawn(taskRunner,[receivePort.sendPort,total]);
+    Isolate.spawn(taskRunner,[receivePort.sendPort,total]);
     receivePort.listen((message) {
-      print(message);
+      // ignore: avoid_print
+      print('Issolate: $message');
     });
   }
   void taskRunner(List<dynamic> param){
@@ -84,6 +95,19 @@ class IsolateDemo extends StatelessWidget{
       total+=i;
     }
     sendPort.send(total);
+  }
+
+  void demoCompute() async{
+    var result = await compute(calculate,1000000000);
+    // ignore: avoid_print
+    print('Compute: $result');
+  }
+  int calculate(int number){
+     var total = 0;
+    for(var i = 0; i < number ; i++){
+      total+=i;
+    }
+    return total;
   }
 }
 
