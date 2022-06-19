@@ -85,7 +85,7 @@ class IsolateDemo extends StatelessWidget{
     Isolate.spawn(taskRunner,[receivePort.sendPort,total]);
     receivePort.listen((message) {
       // ignore: avoid_print
-      print('Issolate: $message');
+      print('Issolate Spawn: $message');
     });
   }
   void taskRunner(List<dynamic> param){
